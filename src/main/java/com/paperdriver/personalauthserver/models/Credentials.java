@@ -10,21 +10,29 @@ import java.util.List;
 public class Credentials implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", columnDefinition = "BIGINT")
     private Long id;
 
     @Version
+    @Column(name = "version")
     private Integer version;
 
     @NotEmpty
+    @Column(name = "name")
     private String name;
 
     @NotEmpty
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(	name = "credentials_authorities",
+            joinColumns = @JoinColumn(name = "credentials_id"),
+            inverseJoinColumns = @JoinColumn(name = "authorities_id"))
     private List<Authority> authorities;
 
+    @Column(name = "enabled")
     private boolean enabled;
 
     public Long getId() {
