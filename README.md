@@ -14,4 +14,6 @@ This branch is a full integration of JPA/Hibernate for authorization server data
 However, the usage of columns (userid, clientid) from the table OAUTH_APPROVALS is unclear. Thus, directly converted the SQL schema
 to JPA entity class.
 
-This is the updated version of feature/client-credential 
+This is the updated version of feature/client-credential.
+
+_**CAUTION**: Test data still need to be manually injected to the database initially but will be permanently maintained._
