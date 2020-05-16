@@ -1,9 +1,11 @@
 package com.paperdriver.personalauthserver.models;
 
+import javafx.util.converter.BigIntegerStringConverter;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @Entity
@@ -20,13 +22,14 @@ public class OauthApprovals {
     @Getter
     @Setter
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID", referencedColumnName = "credentials_id" , columnDefinition = "varchar(255)")
+//    @Convert(converter = BigIntegerStringConverter.class)
+    @JoinColumn(name = "userid", referencedColumnName = "ID" , columnDefinition = "varchar(255)")
     private Credentials credentials;
 
     @Getter
     @Setter
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID", referencedColumnName = "oauth_client_details_id", columnDefinition = "varchar(255)")
+    @JoinColumn(name = "clientid", referencedColumnName = "client_id", columnDefinition = "varchar(255)")
     private OauthClientDetails oauthClientDetails;
 
     @Getter
@@ -41,12 +44,12 @@ public class OauthApprovals {
 
     @Getter
     @Setter
-    @Column(name = "expiresAt")
+    @Column(name = "expiresat")
     private Timestamp expiresAt;
 
     @Getter
     @Setter
-    @Column(name = "lastModifiedAt")
+    @Column(name = "lastmodifiedat")
     private Timestamp lastModifiedAt;
 
 
