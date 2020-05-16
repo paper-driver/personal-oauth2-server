@@ -21,16 +21,19 @@ public class OauthApprovals {
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
-//    @Convert(converter = BigIntegerStringConverter.class)
-    @JoinColumn(name = "userid", referencedColumnName = "ID" , columnDefinition = "varchar(255)")
-    private Credentials credentials;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "userid", referencedColumnName = "ID" , columnDefinition = "varchar(255)")
+//    private Credentials credentials;
+    @Column(name = "userid", columnDefinition = "varchar(255)")
+    private String userId;
 
     @Getter
     @Setter
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clientid", referencedColumnName = "client_id", columnDefinition = "varchar(255)")
-    private OauthClientDetails oauthClientDetails;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "clientid", referencedColumnName = "client_id", columnDefinition = "varchar(255)")
+//    private OauthClientDetails oauthClientDetails;
+    @Column(name = "clientid", columnDefinition = "varchar(255)")
+    private String clientId;
 
     @Getter
     @Setter
