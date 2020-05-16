@@ -8,3 +8,10 @@ This branch is a replication of https://github.com/Akourtiim/oauth2-spring-boot-
 with replacement of database to PostgreSQL on AWS.
 
 The tutorial is [here](https://medium.com/@akourtim.ahmed/oauth-2-centralized-authorization-with-spring-boot-2-0-2-and-spring-security-5-and-jdbc-token-store-8dbc063bd5d4).
+
+## feature/client-credential-2
+This branch is a full integration of JPA/Hibernate for authorization server database instead of relying on SQL scripts.
+However, the usage of columns (userid, clientid) from the table OAUTH_APPROVALS is unclear. Thus, directly converted the SQL schema
+to JPA entity class.
+
+This is the updated version of feature/client-credential 
