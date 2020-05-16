@@ -45,7 +45,7 @@ public class OauthClientDetails {
     @Column(name="additional_information", length=4096)
     private String additionalInformation;
 
-    @Column(name="autoapprove", columnDefinition = "SMALLINT")
+    @Column(name="autoapprove", columnDefinition = "varchar(255)")
     private Integer autoapprove;
 
     @Column(name="uuid")
