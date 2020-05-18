@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="common-header">
-    <title>DevOps</title>
+    <title>OAuth2 Server Auth Dashboard</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
@@ -10,13 +10,19 @@
           href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
           rel="stylesheet" />
 
+    <!-- Bootstrap core js -->
+    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <!--Custom Css  -->
     <link type="text/css" href="/css/style.css" rel="stylesheet"
           media="Screen" />
-</head>
 
-<div th:fragment="before-body-script">
-    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
-    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</div>
+    <!-- form.html custome js -->
+    <script>
+        $(function() {
+            $('.glyphicon-question-sign').tooltip();
+        });
+    </script>
+</head>
 </html>

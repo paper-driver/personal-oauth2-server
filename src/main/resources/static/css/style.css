@@ -13,3 +13,12 @@ footer {
 footer p {
     padding: 15px;
 }
+
+body {
+    padding-top: 50px;
+}
+
+.content {
+    margin: auto;
+    padding: 20px;
+}
