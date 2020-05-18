@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-header">
+    <title>DevOps</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- Bootstrap core CSS -->
+    <link type="text/css"
+          href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+    <!--Custom Css  -->
+    <link type="text/css" href="/css/style.css" rel="stylesheet"
+          media="Screen" />
+</head>
+
+<div th:fragment="before-body-script">
+    <script src="/webjars/jquery/2.1.4/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</div>
+</html>

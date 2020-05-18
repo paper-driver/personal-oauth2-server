@@ -2,14 +2,33 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head lang="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>OAuth Server Index</title>
-    <link rel="stylesheet" href="webjars/bootstrap/3.3.2/css/bootstrap.min.css"/>
-</head>
+<!--<head lang="en">-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+<!--    <title>OAuth Server Index</title>-->
+<!--    <link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>-->
+<!--&lt;!&ndash;    <link rel="stylesheet" th:href="@{|${baseUrl}/css/style.css|}"/>&ndash;&gt;-->
+
+<!--</head>-->
+<head th:replace="common/header :: common-header" />
 <body>
-<div class="container">
-    <h1 class="page-header">OAuth Server Administration Dashboard </h1>
+<div layout:fragment="content" th:remove="tag">
+
+    <header>
+
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <h1 class="page-header">OAuth Server Administration Dashboard </h1>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a th:href="@{/}">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
     <div class="row">
         <div class="col-md-12" >
             <span sec:authorize="isAuthenticated()" style="display: inline-block;">
@@ -93,5 +112,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>
