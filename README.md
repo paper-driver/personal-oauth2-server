@@ -21,9 +21,19 @@ This is the updated version of feature/client-credential.
 _**CAUTION**: Test data still need to be manually injected to the database initially but will be permanently maintained._
 
 ## feature/client-credential-3
+Deployed to [personal-auth-server deployed](https://dashboard.heroku.com/apps/personal-auth-server).
+
 This branch is the modification of feature/client-credential-2. Client-secrets are encoded before being stored in the database.
 However, encoded client-secrets are not decodable. Therefore, the new entity field was added to the table oauth_client_details to store original
 client-secret texts. This way, clients can just copy plain-text client-secrets to go through authorization.
 
 There is no change in Spring provided ClientDetails and ClientDetailsService, but there are some manual mapping from OauthClientDetails to BaseClientDetails when the server is updating information.
 At the index.html, client details are retrieved and mapped to ClientDetails, but in form.html, client details are mapped to OAuthClientDetails before sending out ModelViews.
+
+### Deploy to Heroku
+1. Create a Heroku app without git.    
+``Heroku create <app-name>``
+2. Prepare "Procfile" to set your spring app profile.   
+``web: java -jar target/personal-auth-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev --server.port=$PORT``
+3. Prepare a shell script to execute the deploying the app to Heroku   
+``heroku deploy:jar -j ./target/personal-auth-server-0.0.1-SNAPSHOT.jar -i ./Procfile --app personal-auth-server``
