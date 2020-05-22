@@ -72,6 +72,9 @@ public class ClientController {
             clientsDetailsService.addClientDetails(clientDetails.castToBaseClientDetails(clientDetails));
         }
 
+        if(!clientDetails.getClientSecretString().isEmpty()) {
+            clientDetails.setClientSecret(clientDetails.getClientSecretString());
+        }
 
         if (!clientDetails.getClientSecret().isEmpty()) {
             clientsDetailsService.updateClientSecret(clientDetails.getClientId(), clientDetails.getClientSecret());

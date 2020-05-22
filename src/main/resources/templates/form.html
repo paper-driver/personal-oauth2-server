@@ -36,7 +36,7 @@
                             <span data-toggle="tooltip" data-placement="bottom" class="glyphicon glyphicon-question-sign"
                                   title="Used for the grants client_secret, authorization_code, refresh_token. Will not be updated if left empty. Please use non-encoded secret"></span>
                         </label>
-                        <input class="form-control" id="clientSecretString" type="text" name="clientSecretString" th:value="${clientDetails.clientSecretString}"/>
+                        <input class="form-control" id="clientSecretString" type="text" name="clientSecretString" th:value="${clientDetails.clientSecretString}" required/>
                     </div>
                     <div class="form-group">
                         <label for="registeredRedirectUri">Registered redirect URIs
