@@ -1,5 +1,6 @@
 package com.paperdriver.personalauthserver.controllers;
 
+import com.paperdriver.personalauthserver.models.OauthClientDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +42,7 @@ public class LoginController {
     @RequestMapping("/")
     public ModelAndView root(Map<String,Object> model, Principal principal){
 
-        logger.warn("processing request /");
+        logger.warn("Loading all client detail");
 
         List<Approval> approvals=clientDetailsService.listClientDetails().stream()
                 .map(clientDetails -> approvalStore.getApprovals(principal.getName(),clientDetails.getClientId()))
@@ -49,9 +51,8 @@ public class LoginController {
 
 
         model.put("approvals",approvals);
-        model.put("clientDetails",clientDetailsService.listClientDetails());
+        model.put("clientDetails", clientDetailsService.listClientDetails());
 
-        logger.warn("exiting request /");
         return new ModelAndView ("index",model);
 
     }

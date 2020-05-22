@@ -1,7 +1,11 @@
 package com.paperdriver.personalauthserver.models;
 
+import org.springframework.security.oauth2.provider.ClientDetails;
+import org.springframework.security.oauth2.provider.client.BaseClientDetails;
+
 import javax.persistence.*;
-import java.util.Date;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Entity
 @Table(name="oauth_client_details")
@@ -24,6 +28,9 @@ public class OauthClientDetails {
     @Column(name="client_secret")
     private String clientSecret;
 
+    @Column(name="client_secret_string")
+    private String clientSecretString;
+
     @Column(name="scope")
     private String scope;
 
@@ -31,22 +38,22 @@ public class OauthClientDetails {
     private String authorizedGrantTypes;
 
     @Column(name="web_server_redirect_uri")
-    private String webServerRedirectUri;
+    private String registeredRedirectUri;
 
     @Column(name="authorities")
     private String authorities;
 
     @Column(name="access_token_validity", length=11)
-    private Integer accessTokenValidity;
+    private Integer accessTokenValiditySeconds;
 
     @Column(name="refresh_token_validity", length=11)
-    private Integer refreshTokenValidity;
+    private Integer refreshTokenValiditySeconds;
 
     @Column(name="additional_information", length=4096)
     private String additionalInformation;
 
     @Column(name="autoapprove", columnDefinition = "varchar(255)")
-    private Integer autoapprove;
+    private String autoapprove;
 
     @Column(name="uuid")
     private String uuid;
@@ -106,6 +113,10 @@ public class OauthClientDetails {
         this.clientSecret = clientSecret;
     }
 
+    public String getClientSecretString() { return clientSecretString; }
+
+    public void setClientSecretString(String clientSecretString) { this.clientSecretString = clientSecretString; }
+
     public String getScope() {
         return scope;
     }
@@ -122,12 +133,12 @@ public class OauthClientDetails {
         this.authorizedGrantTypes = authorizedGrantTypes;
     }
 
-    public String getWebServerRedirectUri() {
-        return webServerRedirectUri;
+    public String getRegisteredRedirectUri() {
+        return registeredRedirectUri;
     }
 
-    public void setWebServerRedirectUri(String webServerRedirectUri) {
-        this.webServerRedirectUri = webServerRedirectUri;
+    public void setRegisteredRedirectUri(String registeredRedirectUri) {
+        this.registeredRedirectUri = registeredRedirectUri;
     }
 
     public String getAuthorities() {
@@ -138,20 +149,20 @@ public class OauthClientDetails {
         this.authorities = authorities;
     }
 
-    public Integer getAccessTokenValidity() {
-        return accessTokenValidity;
+    public Integer getAccessTokenValiditySeconds() {
+        return accessTokenValiditySeconds;
     }
 
-    public void setAccessTokenValidity(Integer accessTokenValidity) {
-        this.accessTokenValidity = accessTokenValidity;
+    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
+        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
     }
 
-    public Integer getRefreshTokenValidity() {
-        return refreshTokenValidity;
+    public Integer getRefreshTokenValiditySeconds() {
+        return refreshTokenValiditySeconds;
     }
 
-    public void setRefreshTokenValidity(Integer refreshTokenValidity) {
-        this.refreshTokenValidity = refreshTokenValidity;
+    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
+        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
     }
 
     public String getAdditionalInformation() {
@@ -162,11 +173,11 @@ public class OauthClientDetails {
         this.additionalInformation = additionalInformation;
     }
 
-    public Integer getAutoapprove() {
+    public String getAutoapprove() {
         return autoapprove;
     }
 
-    public void setAutoapprove(Integer autoapprove) {
+    public void setAutoapprove(String autoapprove) {
         this.autoapprove = autoapprove;
     }
 
@@ -218,5 +229,30 @@ public class OauthClientDetails {
         this.ownerEmail = ownerEmail;
     }
 
+    public BaseClientDetails castToBaseClientDetails(OauthClientDetails details) {
+        BaseClientDetails baseDetails = new BaseClientDetails();
+        baseDetails.setAccessTokenValiditySeconds(details.getAccessTokenValiditySeconds());
+        baseDetails.setRefreshTokenValiditySeconds(details.getRefreshTokenValiditySeconds());
+        baseDetails.setAuthorities(new HashSet(Arrays.asList(splitString(details.getAuthorities()))));
+        baseDetails.setAuthorizedGrantTypes(new HashSet(Arrays.asList(splitString(details.getAuthorizedGrantTypes()))));
+        baseDetails.setClientId(details.getClientId());
+        if(details.getClientSecretString() != null){
+            baseDetails.setClientSecret(details.getClientSecretString());
+        }
+        baseDetails.setRegisteredRedirectUri(new HashSet(Arrays.asList(splitString(details.getRegisteredRedirectUri()))));
+        baseDetails.setResourceIds(new HashSet(Arrays.asList(splitString(details.getResourceIds()))));
+        baseDetails.setScope(new HashSet(Arrays.asList(splitString(details.getScope()))));
+        if (details.getAutoapprove() != null) {
+            baseDetails.setAutoApproveScopes(new HashSet(Arrays.asList(splitString(details.getAutoapprove()))));
+        }
 
+        return baseDetails;
+    }
+
+    public String[] splitString(String str) {
+        if (str == null){
+            return null;
+        }
+        return str.split(",");
+    }
 }
