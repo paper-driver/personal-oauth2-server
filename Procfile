@@ -1,0 +1,1 @@
+web: java -jar target/personal-auth-server-0.0.1-SNAPSHOT.jar --spring.profiles.active=dev --server.port=$PORT
