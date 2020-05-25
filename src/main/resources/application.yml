@@ -1,0 +1,22 @@
+server:
+  port: 4300
+
+spring:
+  profile: dev
+  name: personal-auth-server
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: yuxuanmao
+    jdbc-url: jdbc:postgresql://personal-oauth2-server-db.cno7ndfgvs68.us-east-2.rds.amazonaws.com:5432/auth_db
+    username: yuxuanmao
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
